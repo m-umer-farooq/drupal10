@@ -1,0 +1,6 @@
+organization_list:
+  version: 1.x
+  css:
+    theme:
+      css/organization-list.css: {}
+      css/buttons.css: {}

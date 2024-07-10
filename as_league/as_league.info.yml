@@ -1,0 +1,10 @@
+name: 'AdminSports League'
+type: module
+description: 'AdminSports League Module'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:node
+stylesheets:
+  all:
+    - css/as_league.css

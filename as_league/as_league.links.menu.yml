@@ -1,0 +1,27 @@
+as_league.org:
+  title: 'AdminSports Organizations'
+  description: ''
+  parent: system.admin
+  route_name: as_league.orgs.list
+  weight: 10
+
+as_league.org.list:
+  title: 'AdminSports Organizations'
+  description: ''
+  parent: as_league.org
+  route_name: as_league.orgs.list
+  weight: 0
+
+as_league.org.add:
+  title: 'AdminSports Organization Add'
+  description: ''
+  parent: as_league.org
+  route_name: as_league.org.add
+  weight: 1
+
+as_league.org.logo.upload:
+  title: 'AdminSports Organization Add'
+  description: ''
+  parent: as_league.org
+  route_name: as_league.org.logo.upload
+  weight: 1

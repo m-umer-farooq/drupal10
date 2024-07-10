@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function as_league_schema() {
+
+    $schema['as_league_orgs'] = array(
+        'description' => t('The base table for organizations.'),
+        'fields' => array(
+            'org_id' => array(
+                'description' => t('The primary identifier for an organization.'),
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE),
+            'org_full_name' => array(
+                'description' => t('The full formal name of the organization.'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'org_name' => array(
+                'description' => t('The abbreviated name of the organization.'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'website' => array(
+                'description' => t('The url of the organization\'s website.'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'logo_path' => array(
+                'description' => t('Internal path the the organization\'s logo.'),
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => TRUE,
+                'default' => ''),
+            'org_color' => array(
+                'description' => t('text field to hold the organization\'s playing colors (ie. red/blue).'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),  
+            'street' => array(
+                'description' => t('text field to hold the organization\'s street.'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'city' => array(
+                'description' => t('text field to hold the organization\'s city.'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+            'state' => array(
+                'description' => t('text field to hold the organization\'s state.'),
+                'type' => 'varchar',
+                'length' => 2,
+                'not null' => TRUE,
+                'default' => ''),
+            'zip_code' => array(
+                'description' => t('text field to hold the organization\'s zip code.'),
+                'type' => 'varchar',
+                'length' => 10,
+                'not null' => TRUE,
+                'default' => ''),
+            
+        	),
+        'primary key' => array('org_id'),
+    );
+
+  return $schema;
+}

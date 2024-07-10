@@ -1,0 +1,44 @@
+<a href="{{ add_url }}" class="button">Add New Record</a>
+{#/*<a href="{{ path('as_league.organization_add') }}" class="button">Add New Record</a> #}
+<table class="as-league-table">
+  <thead>
+    <tr>
+      {% for header in header %}
+        <th>{{ header }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+      <tr>        
+       <td>{{ row.org_id}}</td>
+       <td>{{ row.org_name}}</td>
+       <td>{{ row.org_full_name}}</td>
+       <td>{{ row.website}}</td>
+       <td>{{ row.logo_path}}</td>
+       <td>{{ row.org_color}}</td>
+       <td>{{ row.street}}</td>
+       <td>{{ row.city}}</td>
+       <td>{{ row.state}}</td>
+       <td>{{ row.zip_code}}</td>
+       <td>
+          {% if row.notify_ref == '1' %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+      </td>
+       <td>
+          {% if row.ref_reject == '1' %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+       </td>
+       <td><a href="/as_league/org/edit/{{row.org_id}}" class="link">Edit</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{{ pager }}

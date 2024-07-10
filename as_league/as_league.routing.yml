@@ -1,0 +1,31 @@
+as_league.orgs.list:
+  path: '/as_league/orgs/list'
+  defaults:
+    _controller: '\Drupal\as_league\Controller\OrganizationController::listRecords'
+    _title: 'Organization Listing'
+  requirements:
+    _permission: 'access content'
+
+as_league.org_add:
+  path: '/as_league/org/add'
+  defaults:
+    _form: '\Drupal\as_league\Form\Organization\AddForm'
+    _title: 'Add Organization'
+  requirements:
+    _permission: 'access content'
+
+as_league.org.edit:
+  path: '/as_league/org/edit/{org_id}'
+  defaults:
+    _form: '\Drupal\as_league\Form\Organization\EditForm'
+    _title: 'Edit Organzation'
+  requirements:
+    _permission: 'access content'
+
+as_league.org.logo.upload:
+  path: '/as_league/org/logo/upload'
+  defaults:
+    _form: '\Drupal\as_league\Form\Organization\FileUploadForm'
+    _title: 'Add Organization Logo'
+  requirements:
+    _permission: 'access content'

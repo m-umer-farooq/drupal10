@@ -1,0 +1,7 @@
+name: 'Bays'
+type: module
+description: 'Module to add fields to as_league_orgs table and forms.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - as_league:as_league

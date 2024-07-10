@@ -1,0 +1,20 @@
+<?php 
+
+/**
+ * Implements hook_theme().
+ */
+function as_league_theme() {
+
+    return [
+      'organization_table' => [
+        'variables' => [
+          'header' => [],
+          'rows' => [],
+          'pager' => NULL,
+          'add_url' => '',
+        ],
+        'template' => 'organization-table',
+      ],
+    ];
+  }
+  

@@ -1,0 +1,51 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_install().
+ */
+function bays_install() {
+  // Add columns to the as_league_orgs table.
+  $connection = Database::getConnection();
+  $schema = $connection->schema();
+  
+  if ($schema->tableExists('as_league_orgs')) {
+    if (!$schema->fieldExists('as_league_orgs', 'notify_ref')) {
+      $schema->addField('as_league_orgs', 'notify_ref', [
+        'description' => 'Used to determine wether the referees get contacted under certain circumstances.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ]);
+    }
+
+    if (!$schema->fieldExists('as_league_orgs', 'ref_reject')) {
+      $schema->addField('as_league_orgs', 'ref_reject', [
+        'description' => 'Indicates wether referees applying to this town will receive an email notifying the referee of the rejection',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ]);
+    }
+
+    if (!$schema->fieldExists('as_league_orgs', 'ztrt')) {
+      $schema->addField('as_league_orgs', 'ztrt', [
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 2,
+        'default' => '',
+      ]);
+    }
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function bays_update_8100() {
+  // Update database schema if needed during module updates.
+  bays_install();
+}
