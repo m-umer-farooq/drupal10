@@ -1,0 +1,3 @@
+services:
+  bays.org_form_alter:
+    class: Drupal\bays\Form\AsLeagueOrgFormAlter

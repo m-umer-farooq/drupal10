@@ -1,0 +1,17 @@
+bays.update_org:
+  path: '/bays/update-org'
+  defaults:
+    _controller: '\Drupal\bays\Controller\BaysOrgController::BaysUpdateOrg'
+    _title: 'Update Organization'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+
+bays.insert_org:
+  path: '/bays/insert-org'
+  defaults:
+    _controller: '\Drupal\bays\Controller\BaysOrgController::BaysInsertOrg'
+    _title: 'Insert Organization'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
