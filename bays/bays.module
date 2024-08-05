@@ -3,5 +3,7 @@
  * Implements hook_form_alter() to modify the as_league organization forms.
  */
 function bays_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
   \Drupal::service('bays.org_form_alter')->alterForm($form, $form_state, $form_id);
+  
 }

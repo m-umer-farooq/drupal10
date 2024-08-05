@@ -72,5 +72,237 @@ function as_league_schema() {
         'primary key' => array('org_id'),
     );
 
+    $schema['as_league_season'] = array(
+        'description' => t('The base table for seasons.'),
+        'fields' => array(
+            'season_name' => array(
+                'description' => t('The name of the season.'),
+                'type' => 'varchar',
+                'length' => 15,
+                'not null' => TRUE,
+                'default' => ''),
+            'start_date' => array(
+                'description' => t('The date that the season starts on'),
+                'mysql_type' => 'date'),
+            'end_date' => array(
+                'description' => t('The date that the season ends on'),
+                'mysql_type' => 'date'),
+            'season' => array(
+                'description' => t('Set to either Fall or Spring.'),
+                'type' => 'varchar',
+                'length' => 6,
+                'not null' => TRUE,
+                'default' => ''),
+            'group_type' => array(
+                'description' => t(''),
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => FALSE,
+                'default' => 'grade'),
+            'active' => array(
+                'description' => t('Wether the current season is active or not'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => '0'),
+            'display' => array(
+                'description' => t('Wether the current season is displayed publicly or not'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => '0'),
+            'registration' => array(
+                'description' => t('Wether the current season is open for registration'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => '0'),
+            'pres_cup' => array(
+                'description' => t(''),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+                'default' => '0'
+            ),
+            'waiver_status' => array(
+                'description' => t('Waiver status: open or closed.'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => 'open'
+            ),
+            'placement_status' => array(
+                'description' => t('Placement status: Youth, High School, Closed.'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => 'open'
+            ),
+        ),
+            'indexes' => array(
+                'SE' => array('start_date','end_date'),
+                'active' => array('active'),
+            ),
+        'primary key' => array('season_name'),
+        );
+
+
+        $schema['as_league_teams'] = array(
+            'description' => t('The base table for teams.'),
+            'fields' => array(
+              'int_team_id' => array(
+                'description' => t('The primary team ID.'),
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE),
+              'team_id' => array(
+                'description' => t('The team ID for the season. This allows us to keep the displayed teamID low for each season'),
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE),
+              'season' => array(
+                'description' => t('The season that the team belongs to'),
+                'type' => 'varchar',
+                'length' => 15,
+                'not null' => TRUE,
+                'default' => ''),
+              'team_name' => array(
+                'description' => t('Team Name'),
+                'type' => 'varchar',
+                'length' => 100,
+                'not null' => TRUE,
+                'default' => ''),
+              'gender' => array(
+                'description' => t('Gender'),
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE,
+                'default' => ''),
+              'age' => array(
+                'description' => t('Age'),
+                'type' => 'int',
+                'not null' => FALSE,
+                'default' => NULL),
+              'grade' => array(
+                'description' => t('Grade'),
+                'type' => 'int',
+                'not null' => FALSE,
+                'default' => NULL),
+              'division' => array(
+                'description' => t('Division'),
+                'type' => 'varchar',
+                'length' => 3,
+                'not null' => TRUE,
+                'default' => ''),
+              'section' => array(
+                'description' => t('Section'),
+                'type' => 'varchar',
+                'length' => 3,
+                'not null' => TRUE,
+                'default' => ''),
+              'section_id' => array(
+                'description' => t('SectionID'),
+                'type' => 'int',
+                'not null' => FALSE,
+                'default' => NULL),
+              'section_num' => array(
+                'description' => t('Section Number'),
+                'type' => 'int',
+                'not null' => FALSE,
+                'default' => NULL),
+              'field_id' => array(
+                'description' => t('Home field for the team'),
+                'type' => 'int',
+                'not null' => FALSE,
+                'default' => NULL),
+              'org_id' => array(
+                'description' => t('Team\'s Parent organization'),
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE,
+                'default' => ''),
+              'REQ_placement' => array(
+                'description' => t('Requested Placement'),
+                'type' => 'varchar',
+                'length' => 25,
+                'not null' => TRUE,
+                'default' => ''),
+              'REQ_reason' => array(
+                'description' => t('Reason for requested placement'),
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => ''),
+              'schedule' => array(
+                'description' => t('Corresponds to the team\'s schedule type'),
+                'type' => 'int',
+                'not null' => FALSE,
+                'default' => NULL),
+              'share_id' => array(
+                'description' => t('Used in field scheduling. \'Share\' team\'s fiveID'),
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE,
+                'default' => ''),
+              'five_id' => array(
+                'description' => t('Team\'s fiveID'),
+                'type' => 'varchar',
+                'length' => 5,
+                'not null' => TRUE,
+                'default' => ''),
+              'special_time' => array(
+                'description' => t('Used to set the default time for the team\'s home games'),
+                'type' => 'varchar',
+                'length' => 8,
+                'not null' => TRUE,
+                'default' => ''),
+              'status' => array(
+                'description' => t('Current status of the team. (standard, playoff, prezcup, etc...) Refer to the team status table'),
+                'type' => 'varchar',
+                'length' => 10,
+                'not null' => TRUE,
+                'default' => ''),
+              'last_div' => array(
+                'description' => '',
+                'type' => 'int',
+                'not null' => FALSE,
+                'default' => NULL),
+              'last_sec' => array(
+                'description' => t('Last Section'),
+                'type' => 'varchar',
+                'length' => 3,
+                'not null' => TRUE,
+                'default' => ''),
+              'club_swap_comments'  => array(
+                'description' => t('club swap comments'),
+                'type' => 'text',
+                'size' => 'normal',
+                'not null' => FALSE),
+              'club_swap_interest' => array(
+                'description' => t('club swap interest drop down'),
+                'type' => 'int',
+                'length' => 2,
+                'not null' => TRUE,
+                'default' => '0'),
+                ),
+        
+                'indexes' => array(
+                    'GADS' => array('gender','age','division','section','season'),
+                    'GAD' => array('gender','age','division','season'),
+                    'ORG' => array('org_id','season'),
+                ),
+            'unique keys' => array(
+              'team_id_season' =>array('team_id','season'),
+                ),
+            'foreign keys' => array(
+                'org' => array(
+                  'table' => 'as_league_orgs',
+                  'columns' => array('org_id' => 'org_id'),
+                 ),
+              ),
+            'primary key' => array('int_team_id'),
+            );
+
+
   return $schema;
 }
