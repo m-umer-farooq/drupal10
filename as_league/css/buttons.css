@@ -32,7 +32,7 @@
  * dropbutton.css or action-links.css as well.
  */
 
- .button {
+ .button1 {
     display: inline-block;
     margin-block: var(--space-m);
     margin-inline: 0 var(--space-s);
@@ -52,7 +52,27 @@
     appearance: none;
     -webkit-font-smoothing: antialiased; /* 2 */
   }
-  
+  .button {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  color: #4679bd;
+  background-repeat: repeat-x;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  padding: 0 16px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ddd;
+  border-left: 1px solid #bbbbbb;
+  border-right: 1px solid #bbbbbb;
+  border-bottom: 1px solid #aaa;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.8), inset 1px 0 rgba(255, 255, 255, 0.4), inset -1px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.2s;
+  user-select: none;
+  background-clip: border;
+  outline: none;
+  }
   .button:not(:focus) {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   }

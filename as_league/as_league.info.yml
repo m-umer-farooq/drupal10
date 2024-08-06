@@ -7,4 +7,5 @@ dependencies:
   - drupal:node
 stylesheets:
   all:
-    - css/as_league.css
+    - css/organization-list.css
+    - css/buttons.css

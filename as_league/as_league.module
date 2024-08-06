@@ -1,5 +1,12 @@
 <?php 
 
+use Drupal\Core\Database\Database;
+
+
+function as_league_db_connection(){
+
+  return Database::getConnection();
+}
 
 /**
  * Implements hook_theme().
@@ -16,5 +23,38 @@ function as_league_theme() {
         ],
         'template' => 'organization-table',
       ],
+      'season-listing' => [
+        'variables' => [
+          'header' => [],
+          'rows' => [],
+          'pager' => NULL,
+          'add_url' => '',
+        ],
+        'template' => 'season-listing',
+      ],
     ];
   }
+
+
+function as_league_season_load($season_name){
+
+  $as_league_season = as_league_db_connection()->select('as_league_season', 'season')->fields('season')->condition('season_name', $season_name)->execute()->fetchObject();
+
+  if($as_league_season){
+    return $as_league_season;
+  }else{
+    return FALSE;
+  }
+}//EO as_league_season_load
+
+
+function as_league_season_save($as_league_season){
+
+  $result = as_league_db_connection()->upsert('as_league_season')->fields($as_league_season)->key('season_name')->execute();
+
+	if($result){
+		return TRUE;
+	}else{
+    return FALSE;
+	}
+}//EO as_league_season_save

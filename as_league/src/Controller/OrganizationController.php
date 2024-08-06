@@ -139,7 +139,7 @@ class OrganizationController extends ControllerBase {
       '#add_url' => Url::fromRoute('as_league.org_add')->toString(),
       '#attached' => [
         'library' => [
-          'as_league/organization_list',
+          'as_league/organization-list',
         ],
       ],
       '#cache' => [

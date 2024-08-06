@@ -1,0 +1,50 @@
+<a href="{{ add_url }}" class="button">Add New</a>
+{#/*<a href="{{ path('as_league.organization_add') }}" class="button">Add New Record</a> #}
+<table class="as-league-table">
+  <thead>
+    <tr>
+      {% for header in header %}
+        <th>{{ header }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+      <tr>        
+       <td>{{ row.season_name}}</td>
+        <td>
+          {% if row.active == '1' %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+      </td>
+      <td>
+          {% if row.display == '1' %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+      </td>
+       <td>
+          {% if row.registration == '1' %}
+            Open
+          {% else %}
+            Closed
+          {% endif %}
+      </td>
+       <td>{{ row.waiver_status}}</td>
+       <td>
+          {% if row.pres_cup == '1' %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+      </td>
+       <td><a href="/as_league/season/edit/{{row.season_name}}" class="link">Edit</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{{ pager }}

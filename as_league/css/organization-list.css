@@ -6,14 +6,14 @@ table.as-league-table {
   }
   
   table.as-league-table th{
-    border: 1px solid #686363;
-    background-color: black;
-    color: #ddd;
+    border: 1px solid #eee;
+    background-color: #eee;
+    color: #000000;
     text-wrap: nowrap;
     padding: 5px;
   }
   table.as-league-table td {
-    border: 1px solid #787878;
+    border: 1px solid #eee;
     padding: 8px;
   }
   

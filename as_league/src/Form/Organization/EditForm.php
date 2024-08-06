@@ -141,6 +141,7 @@ class EditForm extends FormBase {
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save'),
+      '#attributes' => array('class' => array('button')),
     ];
 
     $back_url = Url::fromRoute('as_league.orgs.list');

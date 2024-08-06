@@ -29,3 +29,27 @@ as_league.org.logo.upload:
     _title: 'Add Organization Logo'
   requirements:
     _permission: 'access content'
+
+as_league.season.list:
+  path: '/as_league/season/list'
+  defaults:
+    _controller: '\Drupal\as_league\Controller\SeasonController::listRecords'
+    _title: 'Season Listing'
+  requirements:
+    _permission: 'access content'
+
+as_league.season.add:
+  path: '/as_league/season/add'
+  defaults:
+    _form: '\Drupal\as_league\Form\Season\AddForm'
+    _title: 'Add Season'
+  requirements:
+    _permission: 'access content'
+
+as_league.season.edit:
+  path: '/as_league/season/edit/{season_name}'
+  defaults:
+    _form: '\Drupal\as_league\Form\Season\EditForm'
+    _title: 'Edit Season'
+  requirements:
+    _permission: 'access content'
