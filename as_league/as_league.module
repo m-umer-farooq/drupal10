@@ -58,3 +58,26 @@ function as_league_season_save($as_league_season){
     return FALSE;
 	}
 }//EO as_league_season_save
+
+
+function as_league_org_load($org_id){
+
+  $as_league_org = as_league_db_connection()->select('as_league_orgs', 'org')->fields('org')->condition('org_id', $org_id)->execute()->fetchObject();
+
+  if($as_league_org){
+    return $as_league_org;
+  }else{
+    return FALSE;
+  }
+}//EO as_league_season_load
+
+function as_league_org_save($as_league_org){
+
+  $result = as_league_db_connection()->upsert('as_league_orgs')->fields($as_leagas_league_orgue_season)->key('org_id')->execute();
+
+	if($result){
+		return TRUE;
+	}else{
+    return FALSE;
+	}
+}//EO as_league_org_save

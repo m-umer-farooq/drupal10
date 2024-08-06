@@ -1,6 +1,7 @@
 as_league.main:
   title: 'AdminSports'
   description: ''
+  parent: main
   menu_name: main
   route_name: 'as_league.orgs.list'
   weight: 0

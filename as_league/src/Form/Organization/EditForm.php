@@ -8,23 +8,25 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EditForm extends FormBase {
 
 
   protected $database;
 
-  public function __construct(Connection $database) {
+  public function __construct(Connection $database,  MessengerInterface $messenger) {
     $this->database = $database;
+    $this->messenger = $messenger;
   }
 
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('database')
+      $container->get('database'),
+      $container->get('messenger')
     );
   }
 
@@ -33,28 +35,8 @@ class EditForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state, $org_id = NULL) {
-    $record = NULL;
-    
-    if ($org_id != NULL) {
 
-      $record = $this->database->select('as_league_orgs', 'org')
-        ->fields('org', 
-        [
-            'org_id', 
-            'org_full_name', 
-            'org_name',
-            'website',
-            'logo_path',
-            'org_color',
-            'street',
-            'city',
-            'state',
-            'zip_code',
-            'notify_ref',
-            'ref_reject'            
-            ])
-        ->condition('org_id', $org_id)->execute()->fetchObject();
-    }
+    $record = as_league_org_load($org_id);
 
     $form['id'] = [
       '#type' => 'hidden',
@@ -159,6 +141,7 @@ class EditForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     
     $fields = [
+      'org_id' => $form_state->getValue('org_id'),
       'org_full_name' => $form_state->getValue('org_full_name'),
       'org_name'      => $form_state->getValue('org_name'),
       'website'       => $form_state->getValue('website'),
@@ -170,7 +153,13 @@ class EditForm extends FormBase {
       'zip_code'      => $form_state->getValue('zip_code'),
     ];
 
-    $this->database->update('as_league_orgs')->fields($fields)->condition('org_id', $form_state->getValue('org_id'))->execute();
+    $org_save = as_league_org_save($fields);
+
+    if($org_save){
+      $this->messenger->addMessage($this->t('You have succesfully updated the organization record'), MessengerInterface::TYPE_STATUS);
+    }else{
+      $this->messenger->addMessage($this->t('There was an error updating the organization record.'), MessengerInterface::TYPE_ERROR);
+    }
     
     Cache::invalidateTags(['as_league_cache_tag']);
 

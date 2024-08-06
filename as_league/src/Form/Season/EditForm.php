@@ -172,11 +172,7 @@ class EditForm extends FormBase {
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
-    $season_start_date = (new DrupalDateTime($form_state->getValue('start_date')))->format('Y-m-d');
-    $season_end_date   = (new DrupalDateTime($form_state->getValue('end_date')))->format('Y-m-d');
-
-	//Begin the save routine for the organization object
+ 
 	$as_league_season_load = as_league_season_load($form_state->getValue('season_name'));
 
 	$active_old_stat  = $as_league_season_load->active;
@@ -207,8 +203,8 @@ class EditForm extends FormBase {
 
     $as_league_season = [
         'season_name'       => $form_state->getValue('season_name'),
-        'start_date'        => $season_start_date,
-        'end_date'          => $season_end_date,
+        'start_date'        => (new DrupalDateTime($form_state->getValue('start_date')))->format('Y-m-d'),
+        'end_date'          => (new DrupalDateTime($form_state->getValue('end_date')))->format('Y-m-d'),
         'season'            => $form_state->getValue('season'),
         'group_type'        => $form_state->getValue('group'),
         'active'            => $form_state->getValue('active'),
@@ -222,6 +218,7 @@ class EditForm extends FormBase {
 
 	//If this is the new active season, de-activate the old one.
 	if($as_league_season_load->active == 1 && $active_old_stat == 0){
+
         $this->database->update('as_league_orgs')->fields(['active' => 1])->condition('active', '1')->execute();
 	}
 
